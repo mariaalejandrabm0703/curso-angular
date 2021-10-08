@@ -1,2 +1,19 @@
-<br>
+<br />
 <p>Aquí va el home</p>
+
+<h1>Custom File Upload</h1>
+
+<div class="custom-file-upload">
+  <input
+    type="file"
+    id="file"
+    name="myfiles[]"
+    multiple
+    accept=".xls,.xlsx"
+    (change)="fileUpload($event)"
+  />
+</div>
+
+<div>
+  <pre>{{convertedJson}}</pre>
+</div>
