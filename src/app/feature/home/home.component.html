@@ -7,10 +7,12 @@
   <input
     type="file"
     id="file"
-    name="myfiles[]"
+    name="myfile"
     multiple
     accept=".xls,.xlsx"
-    (change)="fileUpload($event)"
+    appInputFile
+    functionality="update-causes"
+    (someEvent)="fileUpload($event)"
   />
 </div>
 

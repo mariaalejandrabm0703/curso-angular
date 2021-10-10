@@ -9,6 +9,7 @@ export class HomeService {
   constructor(protected http: HttpService) {}
 
   public sendFile(file: FormData) {
+    console.log('entra a sendFile HomeServices')
     return this.http.doPut(
       `${environment.endpoint}/disruption/update-causes`,
       file
