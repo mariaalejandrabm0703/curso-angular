@@ -1,5 +1,6 @@
+// import { HomeService } from "./services/home.service";
 import { Component, OnInit } from "@angular/core";
-import * as XLSX from "xlsx";
+// import * as XLSX from "xlsx";
 
 @Component({
   selector: "app-home",
@@ -8,31 +9,29 @@ import * as XLSX from "xlsx";
 })
 export class HomeComponent implements OnInit {
   title = "Upload files";
-  convertedJson = "";
-  totalJson = { sheets: new Array()};
+  // convertedJson = "";
+  totalJson = { sheets: new Array() };
 
-  constructor() {}
+  // constructor(private services: HomeService) {}
 
   ngOnInit() {}
 
- fileUpload(event: Event) {
-  //  debugger;
+  async fileUpload(event: Event) {
+    this.totalJson = { sheets: new Array() };
     const element = event.target as HTMLInputElement;
     let files = element.files;
-    if (files) {
-      const fileReader = new FileReader();
-      fileReader.readAsBinaryString(files[0]);
+    const form_data = new FormData();
+    form_data.append("nombreArchivo", files[0], "csv");
+    console.log(files)
+    console.log(files[0])
 
-    fileReader.onload = async (e)  => {
-      let binaryData = e.target.result;
-      let workbook =  await XLSX.read(binaryData, { type: "binary" });
-      workbook.SheetNames.forEach((sheet) => {
-        const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]);
-        this.totalJson.sheets.push(data)
-        // this.convertedJson = JSON.stringify(data, undefined, 4);
-      });
-        console.log(this.totalJson)
-      };
-    }
+    // this.services.sendFile(form_data).subscribe(
+    //   (response) => {
+    //     console.log(response);
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
   }
 }
